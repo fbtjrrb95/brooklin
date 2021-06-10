@@ -1,40 +1,66 @@
 package me.screw.brooklin.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Collection;
 
 @Entity
-public class Account {
+public class Account implements UserDetails {
 
     @Id
     @GeneratedValue
     private long Id;
 
-
     @Column(unique = true)
-    private String accountId;
-    private String accountPassword;
+    private String username;
+    private String password;
 
-    public Account(String accountId, String accountPassword) {
-        this.accountId = accountId;
-        this.accountPassword = accountPassword;
+    public Account(){
+        super();
     }
 
-    public String getAccountId() {
-        return accountId;
+    public Account(String username, String password){
+        this.username = username;
+        this.password = password;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
-    public String getAccountPassword() {
-        return accountPassword;
+    @Override
+    public String getPassword() {
+        return this.password;
     }
 
-    public void setAccountPassword(String accountPassword) {
-        this.accountPassword = accountPassword;
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
