@@ -29,4 +29,11 @@ public class HelloControllerTest {
                 .andExpect(status().isOk())
                 ;
     }
+
+    @Test
+    public void helloFail() throws Exception {
+        mockMvc.perform(get("/hello"))
+            .andExpect(status().is4xxClientError())
+            ;
+    }
 }
