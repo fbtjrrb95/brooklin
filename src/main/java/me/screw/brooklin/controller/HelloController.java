@@ -15,7 +15,8 @@ public class HelloController {
 
     @GetMapping("/test")
     public ResponseEntity<String> test(){
-        return ResponseEntity.ok("test_completed");
+        String responseString = "test_completed";
+        return ResponseEntity.ok(responseString);
     }
 
 }
