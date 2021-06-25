@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import org.springframework.security.test.context.support.WithMockUser;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -27,6 +28,7 @@ public class HelloControllerTest {
     public void hello() throws Exception {
         mockMvc.perform(get("/hello"))
                 .andExpect(status().isOk())
+                .andDo(print())
                 ;
     }
 
@@ -34,6 +36,7 @@ public class HelloControllerTest {
     public void helloFail() throws Exception {
         mockMvc.perform(get("/hello"))
             .andExpect(status().is4xxClientError())
+            .andDo(print())
             ;
     }
 }
